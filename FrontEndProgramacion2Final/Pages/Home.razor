@@ -1,0 +1,56 @@
+﻿@page "/"
+<!--Nota importate: Si no te funcionan los estilos de los archivos .css, recompila la solucion.-->
+<!--La division de responsabilidades parece ser esta: la interfaz en el .razor, la logica en un .cs debajo del .razor, y los estilos en un .css debajo del .razor-->
+
+<!--Existen los servicios de los frontends, como vas a hacer llamadas a API vas a tener que usarlos. El servicio FrontEnd no tiene las reglas de negocio, o no las extensas..-->
+
+<!--lo que tenes en Home es la estructura basica de un archivo .razor con sus componentes aislados, seguramente no lo uses en todos los archivos .razor porque no todos tendran mucha logica, pero quien sabe.-->
+
+<PageTitle>Home</PageTitle>
+
+<head>
+    <meta property="og:title" content="PCInBitsHub" />
+    <meta property="og:description" content="Hub Virtual para la Compra de Componentes de Computadora" />
+    <meta property="og:type" content="website" />
+
+    <!--"PCInBitsHub" es el primer titulo que se me ocurrio para un sistema web de este tipo, es un juego de palabras, porque "bits" significa cachitos, pero tambien es el plural de bit en computacion.-->
+    <title>PCInBitsHub</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Hub Virtual para la Compra de Componentes de Computadora" />
+</head>
+<body>
+    <div class="banner">
+        <!--Estas dos etiquetas deberian ir en la misma linea, pero ocupan un width del 100% en vez de estar limitado a su contenido, no se como cambiarlo adecuadamente-->
+        <h1>PCInBitsHub</h1>
+        <div class="h6-banner">
+            <h6>Todos los Componentes de Computadora que Necesitas en un Solo Lugar</h6>
+        </div>
+    </div>
+    <div class="pagina">
+        <div class="texto-home">
+            <h3 class="texto-bienvenido-home">Bienvenido</h3>
+            <p class="texto-descripcion-home">Explore nuestro catalogo de componentes de computadora.
+                Explore nuestro catálogo de componentes de computadora.
+                Nuestro sistema funciona como un hub virtual que reúne enlaces a tiendas online especializadas en hardware. El contenido es cargado y verificado por profesionales de la industria, empresas y colaboradores voluntarios, garantizando información confiable y actualizada.
+                <br />
+                Nuestra plataforma permite identificar con precisión la compatibilidad entre componentes, ayudándolo a tomar decisiones informadas y evitando compras innecesarias o incompatibles. Los usuarios también pueden dejar reseñas y relacionar componentes entre sí, facilitando la elección de piezas tanto para equipos en armado como para computadoras ya configuradas.
+            </p>
+        </div>
+        <div class="div-botones-home">
+            <button class="boton-explorar">
+                <p>Explore Nuestro Catalogo</p>
+            </button>
+        </div>
+        <div class="div-botones-home">
+            <button class="boton-register">
+                <p>Cree una cuenta</p>
+            </button>
+            <p class="botones-home-o">o</p>
+            <button class="boton-login">
+                <p>Inicie Sesion</p>
+            </button>
+        </div>
+    </div>
+</body>
+

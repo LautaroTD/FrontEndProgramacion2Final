@@ -1,0 +1,194 @@
+/*
+    Nota: si cambias un selector y tras recompilar y todos los demas pasos no cambia en el navegador,
+    Pulsa Control + Shift + R en el navegador, esto reiniciara la pagina y forzara a cargar el cache de vuelta.
+*/
+
+.texto-home {
+    width: 90%;
+    display: grid;
+    justify-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+    padding-top:10px;
+}
+
+.texto-bienvenido-home {
+    font-weight: 600;
+    line-height: 1.7;
+    text-shadow: 0px 0px 3px darkgreen;
+    font-size: 2.4rem;
+    animation: aparecer 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.texto-descripcion-home {
+    opacity: 0;
+    animation: aparecer 1s ease forwards;
+    animation-delay: 1s;
+    line-height:1.4;
+}
+
+
+.boton-explorar {
+    background: linear-gradient(lightblue, cadetblue, darkcyan);
+    height: 70px;
+    min-height: fit-content;
+    width: 45vw;
+    min-width: fit-content;
+    border-radius: 6px;
+    box-shadow: 0 6px 8px rgba(0,0,0, 0.3);
+}
+
+    .boton-explorar p {
+        font-size: clamp(1rem, 1.9vw, 2rem);
+    }
+
+    .boton-explorar:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .boton-explorar:active {
+        transform: translateY(0);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+.pagina {
+    background: linear-gradient(#e8ebec,#cde2e9,lightblue); /*colores que usare en todo el sistema, son como el blanco (facil lectura) pero azulado, ta lindo*/
+    height: 100vh; /*vh es una unidad que se refiere al "viewport heiht", que significa altura de puerto de visualizacion (o algo asi), resumen, 100vh es el 100% de la altura de la ventana*/
+}
+
+.boton-register {
+    height: 50px;
+    min-height: fit-content;
+    width: 20vw;
+    min-width: fit-content;
+    background-color: darkcyan;
+    border-radius: 6px;
+    box-shadow: 0 6px 8px rgba(0,0,0, 0.3);
+}
+
+    .boton-register:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .boton-register p {
+        font-size: clamp(1rem, 1.9vw, 2rem)
+    }
+
+    .boton-register:active {
+        transform: translateY(0);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+.botones-home-o{
+    margin-top:12px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.boton-login {
+    height: 50px;
+    min-height: fit-content;
+    width: 20vw;
+    min-width: fit-content;
+    background-color: cadetblue;
+    border-radius: 6px;
+    box-shadow: 0 6px 8px rgba(0,0,0, 0.3);
+}
+    .boton-login:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .boton-login:active {
+        transform: translateY(0);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .boton-login p {
+        font-size: clamp(1rem, 1.9vw, 2rem)
+    }
+
+p{
+    margin:0px;
+}
+
+.p-entre-botones-home {
+    margin-top: 38px;
+    font-size: 1.2rem;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.div-botones-home{
+    display:flex;
+    justify-content:center;
+    margin-top: 50px;
+}
+
+.banner {
+    background-color: green;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    /*Notas muy importantes*/
+    justify-content: center; /*Justify-contect controla el eje X*/
+    align-items: center; /*Justify-item controla el eje Y*/
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 20px rgb(0,0,0, 0.45);
+    gap:20px;
+    border-bottom: 5px solid darkgreen;
+}
+
+h1 {
+    height: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: inherit;
+    color:white;
+    text-shadow: -3px -3px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+    font-size: 3rem;
+}
+
+.h6-banner {
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+}
+
+h6 {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: inherit;
+    color: black;
+    font-size:1.4rem;
+}
+@media(max-height:300px){
+    .boton-explorar {
+        background: linear-gradient(lightblue, cadetblue, darkcyan);
+        height: 12vh;
+        min-height: 40px;
+        width: 45vw;
+        min-width: fit-content;
+        border-radius: 6px;
+        box-shadow: 0 6px 8px rgba(0,0,0, 0.3);
+    }
+        .boton-explorar p {
+            font-size: clamp(1rem, 1.5vw, 2rem);
+        }
+}
