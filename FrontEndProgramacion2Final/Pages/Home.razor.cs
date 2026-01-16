@@ -4,13 +4,24 @@ namespace FrontEndProgramacion2Final.Pages
 {
     public partial class Home : ComponentBase
     {
-        protected string Title { get; set; } = "Home";
+        [Inject]
+        protected NavigationManager Navigation { get; set; } = default!;
 
-        protected int CurrentCount { get; set; }
-
-        protected void IncrementCount()
+        protected void IrAExplorarCatalogo()
         {
-            CurrentCount++;
+            Navigation.NavigateTo("/ExplorarCatalogo");
+        }
+        protected void IrARegistrar()
+        {
+            Navigation.NavigateTo("/Registrar");
+        }
+        protected void IrALogear()
+        {
+            Navigation.NavigateTo("/Logear");
+        }
+        protected void VerUsuarios()
+        {
+            Navigation.NavigateTo("/VerUsuario");
         }
     }
 }

@@ -1,0 +1,47 @@
+﻿@using FrontEndProgramacion2Final.Services
+@using FrontEndProgramacion2Final.DTO
+@page "/ExplorarCatalogo"
+@inject HttpClient Http
+@inject ArticuloService articuloService
+
+<h3>ExplorarCatalogo</h3>
+
+@if (productos == null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <ul>
+        @foreach (var p in productos)
+        {
+            <li>@p.NombreProducto</li>
+        }
+    </ul>
+}
+
+@code {
+    private IEnumerable<DTOArticulo> productos = Enumerable.Empty<DTOArticulo>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("antes de ObtenerTodos");
+        var lista = await articuloService.ObtenerTodos();
+        Console.WriteLine("despues de ObtenerTodos");
+
+        productos = lista;
+
+        if(productos != null)
+        {
+            foreach (var item in productos)
+            {
+                Console.WriteLine($"Producto: {item.NombreProducto}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("productos es null");
+            productos = new List<DTOArticulo>();
+        }
+    }
+}
