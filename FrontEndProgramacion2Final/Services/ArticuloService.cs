@@ -17,7 +17,7 @@ namespace FrontEndProgramacion2Final.Services
         {
             try
             {
-                return await _http.GetFromJsonAsync<List<DTOArticulo>>("api/Articulo/getAll");
+                return await _http.GetFromJsonAsync<IEnumerable<DTOArticulo>>("api/Articulo/getAll");
             }
             catch (Exception ex)
             {

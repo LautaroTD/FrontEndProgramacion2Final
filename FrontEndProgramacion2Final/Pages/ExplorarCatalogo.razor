@@ -12,36 +12,40 @@
 }
 else
 {
-    <ul>
-        @foreach (var p in productos)
+    <div class="btn-group-vertical mb-3">
+        @foreach (var grupo in gruposPaginados)
         {
-            <li>@p.NombreProducto</li>
+            <button class="btn btn-primary"
+                    @onclick="@(() => ToggleGrupo(grupo.Nombre))">
+                @grupo.Nombre
+            </button>
+
+            @if (grupo.IsExpanded)
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var item in grupo.Items)
+                    {
+                        <li class="list-group-item">
+                            @item.Descripcion
+                        </li>
+                    }
+                </ul>
+            }
         }
-    </ul>
+    </div>
+
+    <nav aria-label="Paginación">
+        <ul class="pagination">
+            <li class="page-item @(paginaActual == 1 ? "disabled" : "")">
+                <button class="page-link" @onclick="PrevPage">Anterior</button>
+            </li>
+            <li class="page-item @(paginaActual == totalPaginas ? "disabled" : "")">
+                <button class="page-link" @onclick="NextPage">Siguiente</button>
+            </li>
+        </ul>
+    </nav>
 }
 
 @code {
-    private IEnumerable<DTOArticulo> productos = Enumerable.Empty<DTOArticulo>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        Console.WriteLine("antes de ObtenerTodos");
-        var lista = await articuloService.ObtenerTodos();
-        Console.WriteLine("despues de ObtenerTodos");
-
-        productos = lista;
-
-        if(productos != null)
-        {
-            foreach (var item in productos)
-            {
-                Console.WriteLine($"Producto: {item.NombreProducto}");
-            }
-        }
-        else
-        {
-            Console.WriteLine("productos es null");
-            productos = new List<DTOArticulo>();
-        }
-    }
+    
 }
