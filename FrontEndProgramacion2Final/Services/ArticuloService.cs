@@ -9,9 +9,11 @@ namespace FrontEndProgramacion2Final.Services
     public class ArticuloService : IArticuloService
     {
         private readonly HttpClient _http;
-        public ArticuloService(HttpClient http)
+        private readonly ILogger<ArticuloService> _logger;
+        public ArticuloService(HttpClient http, ILogger<ArticuloService> logger)
         {
             _http = http;
+            _logger = logger;
         }
         public async Task<IEnumerable<DTOArticulo>> ObtenerTodos()
         {
@@ -21,7 +23,7 @@ namespace FrontEndProgramacion2Final.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message, "Error en ArticuloService");
                 throw new Exception(ex.Message);
             }
         }

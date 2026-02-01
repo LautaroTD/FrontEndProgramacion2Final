@@ -1,2 +1,19 @@
 ﻿body {
 }
+
+.AlbumImagenes {
+    max-height:120px;
+    height:auto;
+}
+
+/* Nota: la clase "visible" y "oculto" se suman a la clase AlbumImagenes, alternandose para lo que senecesite, muy cool, no lo sabia.*/
+/*
+    Nota2: descartado porque no me sirve en este momento :\
+.Visible {
+    display: flex;
+}
+
+.Oculto {
+    display: none;
+}
+*/

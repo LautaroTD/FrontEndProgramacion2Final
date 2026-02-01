@@ -1,10 +1,30 @@
 ﻿@using FrontEndProgramacion2Final.Services
 @using FrontEndProgramacion2Final.DTO
+@using System.Globalization;
 @page "/ExplorarCatalogo"
 @inject HttpClient Http
 @inject ArticuloService articuloService
+@inject ImagenService imagenService
 
+<head>
+    <meta property="og:title" content="PCInBitsHub" />
+    <meta property="og:description" content="Hub Virtual para la Compra de Componentes de Computadora" />
+    <meta property="og:type" content="website" />
+
+    <!--"PCInBitsHub" es el primer titulo que se me ocurrio para un sistema web de este tipo, es un juego de palabras, porque "bits" significa cachitos, pero tambien es el plural de bit en computacion.-->
+    <title>Explorador de Catalogo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Hub Virtual para la Compra de Componentes de Computadora" />
+
+</head>
+<body>
 <h3>ExplorarCatalogo</h3>
+
+    <input class="form-control mb-3"
+           placeholder="Buscar por Nombre"
+           value="@terminoBusqueda"
+           @oninput="OnBusquedaChanged" />
 
 @if (productos == null)
 {
@@ -22,14 +42,78 @@ else
 
             @if (grupo.IsExpanded)
             {
-                <ul class="list-group list-group-flush">
-                    @foreach (var item in grupo.Items)
-                    {
-                        <li class="list-group-item">
-                            @item.Descripcion
-                        </li>
-                    }
-                </ul>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>id</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Url</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in grupo.ItemsPaginados)
+                        {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Descripcion</td>
+                            <td>@item.Precio.ToString("C", new CultureInfo("en-US"))</td>
+                            <td>
+                                    <a href="@item.Url">@item.Url</a> <!--Nota: Si item.url es algo asi "https://www.w3schools.com/" te manda a otra pagina, si es algo asi "texto-de-ejemplo" te lo agrega a la navegacion del sistema web (una pagina interna, hecha por TI)-->
+                            </td>
+                            <td><button @onclick="@(() => BuscarImagenes(grupo, item.Id, "Articulo"))">Ver Imagenes</button></td>
+                        </tr>
+                            
+                        <tr class="table-secondary" style="display:@(item.IsExpanded ? "table-row" : "none")">
+                                    @foreach (var img in Imagenes)
+                            { <!--Fantastico! anda, ahora solo necesito que todos los registros se CIERREN cuando abra uno nuevo o toque otro "Ver Imagenes" de otro registro, para eso deberia pasar el grupo.ItemsPaginados en vez de solo el item y agarrar Todos los item menos el que id concuerde con el que ID concuerde con el foreach actual y esconderlos, y abrir el item del foreach actual.-->
+                                <td>
+                                    <div style="padding:10px;">
+                                                <a href="https://localhost:7023/Imagenes/@img.Ruta">
+                                                <img src="https://localhost:7023/Imagenes/@img.Ruta" style="height:80px;" />
+                                                </a>    
+                                    </div>
+                                </td>
+                            }
+                            @if(Imagenes.Count() == 0)
+                            {
+                                <td>
+                                    <p>No hay imagenes cargadas para presentar</p>
+                                </td>
+                            }
+                        </tr>
+                        }
+                    </tbody>
+                        
+                </table>
+
+                @if (grupo.TotalPaginas > 1)
+                {
+                    <nav aria-label="Paginación del grupo">
+                        <ul class="pagination pagination-sm justify-content-center">
+                            <li class="page-item @(grupo.PaginaActual == 1 ? "disabled" : "")">
+                                <button class="page-link"
+                                        @onclick="() => CambiarPaginaGrupo(grupo, grupo.PaginaActual - 1)">
+                                    Anterior
+                                </button>
+                            </li>
+
+                            <li class="page-item disabled">
+                                <span class="page-link">
+                                    @grupo.PaginaActual / @grupo.TotalPaginas
+                                </span>
+                            </li>
+
+                            <li class="page-item @(grupo.PaginaActual == grupo.TotalPaginas ? "disabled" : "")">
+                                <button class="page-link"
+                                        @onclick="() => CambiarPaginaGrupo(grupo, grupo.PaginaActual + 1)">
+                                    Siguiente
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                }
+
             }
         }
     </div>
@@ -45,7 +129,4 @@ else
         </ul>
     </nav>
 }
-
-@code {
-    
-}
+</body>
