@@ -23,6 +23,12 @@ namespace FrontEndProgramacion2Final.Pages
 
         protected IEnumerable<Imagen> Imagenes = Enumerable.Empty<Imagen>();
 
+        //test
+        private int paginaActualImagenes = 1;
+        private int tamanoPaginaImagenes = 5;
+        private int totalImagenes = 0;
+        protected IEnumerable<Imagen> ImagenesPaginadas = Enumerable.Empty<Imagen>();
+        //test
 
         protected override async Task OnInitializedAsync()
         {
@@ -59,6 +65,27 @@ namespace FrontEndProgramacion2Final.Pages
                 }
             }
             Imagenes = await imagenService.ObtenerTodos(id, tipo); //Nota: los "using" de los services estan en el .razor, son los inject, se comparten con la isolacion de visual
+        
+            totalImagenes= Imagenes.Count();
+
+            ImagenesPaginadas = Imagenes
+                .Skip((paginaActualImagenes - 1) * tamanoPaginaImagenes)
+                .Take(tamanoPaginaImagenes)
+                .ToList();
+
+            paginaActualImagenes = 1;
+        }
+        
+        private void CambiarPaginaImagenes(int nuevaPagina)
+        {
+            if (nuevaPagina < 1 || nuevaPagina > (totalImagenes/tamanoPaginaImagenes + 1))
+                return;
+            paginaActualImagenes = nuevaPagina;
+
+            ImagenesPaginadas = Imagenes
+                .Skip((paginaActualImagenes - 1) * tamanoPaginaImagenes)
+                .Take(tamanoPaginaImagenes)
+                .ToList();
         }
 
         private void FiltrarYAgrupar()

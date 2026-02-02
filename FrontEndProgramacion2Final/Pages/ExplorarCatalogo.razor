@@ -65,12 +65,21 @@ else
                         </tr>
                             
                         <tr class="table-secondary" style="display:@(item.IsExpanded ? "table-row" : "none")">
-                                    @foreach (var img in Imagenes)
-                            { <!--Fantastico! anda, ahora solo necesito que todos los registros se CIERREN cuando abra uno nuevo o toque otro "Ver Imagenes" de otro registro, para eso deberia pasar el grupo.ItemsPaginados en vez de solo el item y agarrar Todos los item menos el que id concuerde con el que ID concuerde con el foreach actual y esconderlos, y abrir el item del foreach actual.-->
+                            @if(Imagenes.Count() > tamanoPaginaImagenes)
+                            {
                                 <td>
+                                            <button @onclick="() =>CambiarPaginaImagenes(paginaActualImagenes+1)">Siguiente</button>
+                                            <button @onclick="() =>CambiarPaginaImagenes(paginaActualImagenes-1)">Anterior</button>
+                                        <!--Nota: usar "onclick="@metodo" te pide que devuelva un bool, usar "@onclick="metodo" te pide que devuelva eventcallback, hacerlo de la forma que lo hice aca arriba no te pide nada"-->        
+                                        </td>
+
+                            }
+                                    @foreach (var img in ImagenesPaginadas)
+                            { <!--Fantastico! anda, ahora solo necesito que todos los registros se CIERREN cuando abra uno nuevo o toque otro "Ver Imagenes" de otro registro, para eso deberia pasar el grupo.ItemsPaginados en vez de solo el item y agarrar Todos los item menos el que id concuerde con el que ID concuerde con el foreach actual y esconderlos, y abrir el item del foreach actual.-->
+                                <td> <!--Nota: No intentar tomar y readaptar el sistema de paginado actual, hacer uno nuevo, uno mas sencillo y usarlo solo para imagenes-->
                                     <div style="padding:10px;">
                                                 <a href="https://localhost:7023/Imagenes/@img.Ruta">
-                                                <img src="https://localhost:7023/Imagenes/@img.Ruta" style="height:80px;" />
+                                                <img src="https://localhost:7023/Imagenes/@img.Ruta" style="height:80px; width:80px" />
                                                 </a>    
                                     </div>
                                 </td>
